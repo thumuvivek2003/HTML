@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Calc
+        </title>
+    </head>
+    <body>
+        <div id="container">
+        <input id="screen">
+        <!-- <h1 id="h1"></h1> -->
+        <table>
+            <tr>
+                <td><button class="button"  onclick="sclear()">C</button></td>
+                <td><button class="button"  onclick="back()">B</button></td>
+                <td><button class="button" value="%" onclick="fun(mudolo)">%</button></td>
+                <td><button class="button"  onclick="fun(divide)">/</button></td>
+            </tr>
+            <tr>
+                <td><button class="button" value="7" onclick="fun(7)">7</button></td>
+                <td><button class="button" value="8" onclick="fun(8)">8</button></td>
+                <td><button class="button" value="9" onclick="fun(9)">9</button></td>
+                <td><button class="button"  onclick="fun(multiply)">X</button></td>
+            
+            </tr>
+            <tr>
+                <td><button class="button"  value="4" onclick="fun(4)">4</button></td>
+                <td><button class="button" value="5" onclick="fun(5)">5</button></td>
+                <td><button class="button" value="6" onclick="fun(6)">6</button></td>
+                <td><button class="button"  onclick="fun(minus)">-</button></td>
+    
+            </tr>
+            <tr>
+                <td><button class="button" value="1" onclick="fun(1)">1</button></td>
+                <td><button class="button" value="2" onclick="fun(2)">2</button></td>
+                <td><button class="button" value="3" onclick="fun(3)">3</button></td>
+                <td><button class="button"  onclick="fun(plus)">+</button></td>
+    
+            </tr>
+
+            <tr>
+                <td><button  value="1" onclick="fun(0)">0</button></td>
+                <td><button  value="2" onclick="fun(dot)">.</button></td>
+                <td colspan="2"><button  value="3" onclick="equal()">=</button></td>
+                <!-- <td><button   onclick="fun(plus)">+</button></td> -->
+    
+            </tr>
+        </table>
+    </div>
+    </body>
+</html>
+
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    #screen{
+        /* top:50%; */
+        /* left:50%; */
+        height:100px;
+        padding: 2px;
+        margin: 0;
+        width: 100%;
+        font-size:30px;
+        /* height:20px; */
+        border: 5px double rgb(66, 53, 240,0.8);
+    }
+    #container{
+        border:2px black solid;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width:100%;
+
+    }
+
+    button{
+        background-image:linear-gradient(white,rgb(118, 118, 239),rgb(170, 170, 216),rgb(170,170,216),rgb(118, 118, 239));
+        border: 1px rgb(68, 68, 237) groove;
+        width: 100%;
+        height: 60px;
+        box-shadow: 1px 1px 1px rgb(144, 144, 243);
+        transition: 0.2s ease-in-out;
+        border-radius: 5px;
+        font-size: 25px;
+        font-weight:150;
+        font-family: cursive;
+
+    }
+    button:active{
+      background-image:linear-gradient(white,rgb(80, 167, 238),rgb(144, 224, 244),white,rgb(80, 167, 238));  
+      transform:translateY(2px);
+      box-shadow: 1px 1px 1px rgb(104, 176, 221);
+      border-radius: 5px;
+
+    }
+    table{
+        background-color: aliceblue;
+        margin: 0 auto;
+        border:0.8px solid rgb(139, 139, 244);
+        width: 100%;
+        height: 100%;
+    }
+    td{
+        border:none;
+        
+    }
+</style>
+
+<script>
+    var mudolo ="%";
+    var divide ="/";
+    var multiply ="*";
+    var plus ="+";
+    var minus ="-";
+    var dot = ".";
+    let screen = document.getElementById("screen");
+    function fun(value){
+        screen.value+=value;
+    }
+    function sclear(){
+        screen.value="";
+    }
+    function back(){
+        let temp = screen.value;
+        screen.value="";
+        for(let i=0;i<temp.length-1;i++)
+        {
+            screen.value+=temp[i];
+        }
+    }
+    function equal(){
+        let temp = screen.value;
+        screen.value=eval(temp);
+    }
+</script>
