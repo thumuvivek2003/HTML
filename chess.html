@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html>
 
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <head>
     <title>
         Chess Desgined by Vivek
     </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
+   
     <div class="header">
         <div id="icon" style="display:grid;grid-template-columns:80% 20%;">
             <div>
@@ -21,8 +23,10 @@
                             class="fa fa-youtube"
                             style="font-size:3.2em;margin:4px -5px;color:rgb(74, 74, 241)"></i></span></a></div>
         </div>
+        <div>
+            <select id='themeSelect'  onchange="changeTheme()" style='width:100%;padding:3px;margint:5px;outline: none;'></select>
+        </div>
     </div>
-
 
 
     <div id="board"></div>
@@ -38,7 +42,6 @@
         padding: 8px;
         text-align: center;
         box-shadow: #000000 2px 2px 6px inset;
-        /* box-shadow: #000000 2px 2px 6px; */
         border-radius: 5px;
         border: 1px groove black;
         margin-bottom: 5px;
@@ -83,7 +86,7 @@
         width: 380px;
         border: 3px black solid;
         font-size: xx-large;
-        font-weight: 1000;
+        /* font-weight: 1000; */
     }
 
     .piece {
@@ -100,10 +103,10 @@
         box-shadow: black 2px 2px 3px inset;
     }
 
-    .square:hover {
+
+    .square:not(.selected):hover{
         border: 2px solid black;
         font-size: 35px;
-        /* cursor:none; */
         padding: 0px;
         margin: 0px;
         box-shadow: black 2px 2px 3px;
@@ -120,35 +123,28 @@
     }
 
     .selected {
-        background-color: rgb(109, 109, 214, 0.8);
-        box-shadow: black 5px 5px 10px;
+        box-shadow: inset 0 0 0 200px rgba(109, 109, 214, 0.8);
         border: 2px black groove;
         margin: 0px;
         padding: 0px;
+
     }
 
     .blackPiece {
         color: black;
-        /* -webkit-text-stroke: 0.4px rgb(255, 255, 255); */
     }
 
     .whitePiece {
-        /* color: rgb(104, 202, 158); */
         color:rgb(255, 255, 255);
         text-shadow: rgb(0, 0, 0) 2px 2px 3px;
-        /* -webkit-text-stroke: 0.8px rgb(0, 0, 0); */
     }
 
     .blackPiece {
-        /* text-shadow: rgb(155, 134, 246) 2px 2px 1px; */
         text-shadow: white 1px 1px 2px;
-        /* text-shadow: rgb(57, 57, 60) 2px 2px 2px; */
     }
 
     .whitePiece {
-        /* color:rgb(104, 202, 158); */
-        /* text-shadow: rgb(0, 0, 0) 2px 2px 3px; */
-        -webkit-text-stroke: 0.8px rgb(0, 0, 0);
+        text-shadow: rgb(0, 0, 0) 2px 2px 3px;
     }
 </style>
 
@@ -261,4 +257,105 @@
         });
     };
     // console.log(square[i]);
+
+
+
+
+
+    //Theme Selection
+    var colors = {
+        "1": ["#fff", "#000"],
+        "2": ["#86A7FC", "#FF9843"],
+        "3": ["#F8F4EC", "#FF9BD2"],
+        "4": ["#B4D4FF", "#7077A1"],
+        "5": ["#F6B17A", "#2D3250"],
+        "6": ["#FFDD95", "#3468C0"],
+        "7": ["#F8F4EC", "#FF9BD2"],
+        "8": ["#F8E559", "#3B3486"],
+        "9": ["#FF9BD2", "#F8F4EC"],
+        "10": ["#FF9BD2", "#F8F4EC"],
+
+
+
+        "11": ["#FDFFAB", "#332941"],
+        "12": ["#D9EDBF", "#864AF9"],
+        "13": ["#FAEF9B", "#FF004D"],
+        "14": ["#FAEF5D", "#6DA4AA"],
+        "15": ["#D5F0C1", "#365486"],
+        "16": ["#F6B17A", "#7077A1"],
+        "17": ["#F8FAE5", "#43766C"],
+        "18": ["#B19470", "#76453B"],
+        "19": ["#FBF9F1", "#525CEB"],
+        "20": ["#FFE7C1", "#525CEB"],
+
+
+        "21": ["#F3CCF3", "#597E52"],
+        "22": ["#86B6F6", "#176B87"],
+        "23": ["#596FB7", "#11235A"],
+        "24": ["#B4D4FF", "#7077A1"],
+        "25": ["#F6B17A", "#2D3250"],
+        "26": ["#FFDD95", "#3468C0"],
+        "27": ["#F8F4EC", "#FF9BD2"],
+        "28": ["#F8E559", "#3B3486"],
+        "29": ["#FF9BD2", "#F8F4EC"],
+        "30": ["#FF9BD2", "#F8F4EC"],
+
+
+        "31": ["#fff", "#000"],
+        "32": ["#86A7FC", "#FF9843"],
+        "33": ["#F8F4EC", "#FF9BD2"],
+        "34": ["#B4D4FF", "#7077A1"],
+        "35": ["#F6B17A", "#2D3250"],
+        "36": ["#FFDD95", "#3468C0"],
+        "37": ["#F8F4EC", "#FF9BD2"],
+        "38": ["#F8E559", "#3B3486"],
+        "39": ["#FF9BD2", "#F8F4EC"],
+        "40": ["#FF9BD2", "#F8F4EC"],
+
+        "41": ["#fff", "#000"],
+        "42": ["#86A7FC", "#FF9843"],
+        "43": ["#F8F4EC", "#FF9BD2"],
+        "44": ["#B4D4FF", "#7077A1"],
+        "45": ["#F6B17A", "#2D3250"],
+        "46": ["#FFDD95", "#3468C0"],
+        "47": ["#F8F4EC", "#FF9BD2"],
+        "48": ["#F8E559", "#3B3486"],
+        "49": ["#FF9BD2", "#F8F4EC"],
+        "50": ["#FF9BD2", "#F8F4EC"],
+    };
+    var themeSelect = document.getElementById("themeSelect");
+    for (var key in colors) {
+        if (colors.hasOwnProperty(key)) {
+            var option = document.createElement("option");
+            option.value = key;
+            option.text = "Theme " + key;
+
+            themeSelect.appendChild(option);
+        }
+    }
+    // var blackSquares = document.querySelectorAll('.squareBlack');
+    // var whiteSquares = document.querySelectorAll('.squareWhite');
+    
+   
+
+   
+
+
+    function  changeTheme(){
+        var selectedTheme = themeSelect.value;
+        var [col1, col2] = colors[selectedTheme];
+
+        // return;
+        $('.squareBlack').css('background-color', col2);
+        $('.squareWhite').css('background-color', col1);
+        // blackSquares.forEach(function(square) {
+        //     square.style.backgroundColor = col1;
+        // });
+
+        // whiteSquares.forEach(function(square) {
+        //     square.style.backgroundColor = col2;
+        // });
+        
+    }
+    // document.getElementById("theme")
 </script>
